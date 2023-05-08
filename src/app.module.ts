@@ -3,9 +3,18 @@ import { SecretModule } from './secret/secret.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule } from '@nestjs/throttler';
 
+const dbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME;
+const dbName = 'nest';
+const host = 'crate-secret-mongo';
+const port = '27017';
+
+const mongoURI = `mongodb://${dbUser}:${dbPassword}@${host}:${port}`;
+
+console.log(mongoURI);
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://crate-secret-mongo:27017/nest'),
+    MongooseModule.forRoot(mongoURI, { dbName }),
     SecretModule,
     ThrottlerModule.forRoot(),
   ],
