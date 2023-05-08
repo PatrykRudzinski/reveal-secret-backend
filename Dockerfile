@@ -8,11 +8,20 @@ WORKDIR /app
 COPY package*.json ./
 COPY . .
 
+# Ustaw wartość domyślną zmiennej środowiskowej NODE_ENV na 'development'
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
 # Zainstaluj zależności
 RUN npm install
 
 # Otwórz port, na którym działa aplikacja
 EXPOSE 3000
 
-# Uruchom aplikację
-CMD ["npm", "run", "start:dev"]
+# Uruchom aplikację w zależności od zmiennej środowiskowej NODE_ENV
+CMD if [ "${NODE_ENV}" = "production" ]; \
+    then \
+      npm run build && npm run start:prod; \
+    else \
+      npm run start:dev; \
+    fi

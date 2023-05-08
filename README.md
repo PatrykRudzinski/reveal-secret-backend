@@ -1,4 +1,8 @@
-> ## To run project just use `docker compose up --build`
+> ### To run project locally just use `docker compose up --build`
+
+> ### To run project in production mode use `NODE_ENV=production docker compose up --build`
+> 
+> ### However, you can pass `MONGO_INITDB_ROOT_USERNAME` and `MONGO_INITDB_ROOT_PASSWORD` to use stronger password
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>

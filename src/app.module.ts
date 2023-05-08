@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { SecretModule } from './secret/secret.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule } from '@nestjs/throttler';
+import * as process from 'process';
 
 const dbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const dbUser = process.env.MONGO_INITDB_ROOT_USERNAME;
@@ -11,7 +12,6 @@ const port = '27017';
 
 const mongoURI = `mongodb://${dbUser}:${dbPassword}@${host}:${port}`;
 
-console.log(mongoURI);
 @Module({
   imports: [
     MongooseModule.forRoot(mongoURI, { dbName }),
