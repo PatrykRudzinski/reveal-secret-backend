@@ -1,0 +1,18 @@
+version: '3'
+services:
+  crate-secret-nest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - MONGO_URI=mongodb://crate-secret-mongo:27017/nest
+    depends_on:
+      - crate-secret-mongo
+    volumes:
+      - .:/app
+  crate-secret-mongo:
+    image: mongo:latest
+    ports:
+      - '27017:27017'
