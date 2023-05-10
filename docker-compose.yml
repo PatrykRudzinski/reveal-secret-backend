@@ -1,4 +1,7 @@
 version: '3'
+volumes:
+  node-modules:
+
 services:
   crate-secret-nest:
     build:
@@ -14,6 +17,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-password}
     volumes:
+      - node-modules:/app/node_modules
       - .:/app
   crate-secret-mongo:
     image: mongo:latest
